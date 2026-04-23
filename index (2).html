@@ -1161,7 +1161,7 @@
                     <div class="flow-step">
                         <div class="flow-step-number">1</div>
                         <div class="flow-step-title">Feedback</div>
-                        <div class="flow-step-desc">Quarterly surveys capture operational insights & CSR preferences</div>
+                        <div class="flow-step-desc">Continuous AI feedback captures operational insights in real time</div>
                     </div>
                     <div class="flow-step">
                         <div class="flow-step-number">2</div>
@@ -1464,10 +1464,34 @@
     <!-- Bottom Split: Survey & Chatbot -->
     <section class="bottom-split" id="feedback">
         <div class="split-container">
+    <!-- AI Feedback (Continuous) -->
+<div class="split-section">
+    <h3>Real-Time Feedback (AI Concierge)</h3>
+    <p class="subtitle">Post-delivery feedback captured through voice or text and processed instantly by AI</p>
+    
+    <form class="survey-form" onsubmit="handleAIFeedback(event)">
+        
+        <div class="form-group">
+            <label>Submit feedback (voice or text):</label>
+            <textarea placeholder="Describe delivery issues, product concerns, or service feedback..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Optional: Upload voice note</label>
+            <input type="file" accept="audio/*">
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Real-Time Feedback</button>
+    </form>
+
+    <div class="recognition-note">
+        This feedback is processed instantly by the AI Concierge and contributes to operational improvements. Consistent participation unlocks eligibility for quarterly voting and recognition.
+    </div>
+</div> 
             <!-- Survey Form -->
             <div class="split-section">
-                <h3>Quarterly Partner Survey</h3>
-                <p class="subtitle">Structured feedback mechanism driving operational improvements and CSR allocation decisions</p>
+                <h3>Quarterly Voting Survey (Eligible Partners Only)</h3>
+                <p class="subtitle">This quarterly survey is available only to restaurants with consistent engagement in real-time feedback. It captures operational ratings and allocates votes to community causes.</p>
                 
                 <form class="survey-form" onsubmit="handleSurveySubmit(event)">
                     <!-- Rating Section -->
@@ -1641,7 +1665,11 @@
             const remaining = totalVotes - Object.values(votes).reduce((a, b) => a + b, 0);
             document.getElementById('remaining-votes').textContent = remaining;
         }
-
+function handleAIFeedback(event) {
+    event.preventDefault();
+    alert('Real-time feedback submitted. Your input has been processed by the AI Concierge and routed for immediate analysis.');
+    event.target.reset();
+}
         // Survey Form Handler
         function handleSurveySubmit(event) {
             event.preventDefault();
