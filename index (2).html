@@ -1464,6 +1464,26 @@
     <!-- Bottom Split: Survey & Chatbot -->
     <section class="bottom-split" id="feedback">
         <div class="split-container">
+                        <!-- AI Chatbot -->
+            <div class="split-section">
+                <h3>Platform Support Assistant</h3>
+                <p class="subtitle">Real-time guidance on tier selection, event participation, feedback submission, and impact metrics</p>
+                
+                <div class="chatbot-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-message bot">
+                            <div class="message-avatar bot">🐝</div>
+                            <div class="message-bubble bot">
+                                Welcome to the BEE The Good platform assistant. I can help you understand tier benefits, participation requirements, feedback mechanisms, or impact analytics. What would you like to know?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Ask about tiers, events, feedback, or metrics..." onkeypress="handleChatKeypress(event)">
+                        <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
     <!-- AI Feedback (Continuous) -->
 <div class="split-section">
     <h3>Real-Time Feedback (AI Concierge)</h3>
