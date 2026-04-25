@@ -1460,197 +1460,185 @@
             </div>
         </div>
     </section>
+<!-- Bottom Split: Feedback + Voting -->
+<section class="bottom-split" id="feedback">
+    <div class="split-container">
 
-    <!-- Bottom Split: Survey & Chatbot -->
-    <section class="bottom-split" id="feedback">
-        <div class="split-container">
-                        <!-- AI Chatbot -->
-            <div class="split-section">
-                <h3>Platform Support Assistant</h3>
-                <p class="subtitle">Real-time guidance on tier selection, event participation, feedback submission, and impact metrics</p>
+        <!-- LEFT: AI Feedback -->
+        <div class="split-section">
+            <h3>Real-Time Feedback (AI Concierge)</h3>
+            <p class="subtitle">Post-delivery feedback captured through voice or text and processed instantly by AI</p>
+            
+            <form class="survey-form" onsubmit="handleAIFeedback(event)">
                 
-                <div class="chatbot-container">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="chat-message bot">
-                            <div class="message-avatar bot">🐝</div>
-                            <div class="message-bubble bot">
-                                Welcome to the BEE The Good platform assistant. I can help you understand tier benefits, participation requirements, feedback mechanisms, or impact analytics. What would you like to know?
+                <div class="form-group">
+                    <label>Submit feedback (voice or text):</label>
+                    <textarea placeholder="Describe delivery issues, product concerns, or service feedback..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Optional: Upload voice note</label>
+                    <input type="file" accept="audio/*">
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Real-Time Feedback</button>
+            </form>
+
+            <div class="recognition-note">
+                This feedback is processed instantly by the AI Concierge and contributes to operational improvements. Consistent participation unlocks eligibility for quarterly voting and recognition.
+            </div>
+        </div>
+
+        <!-- RIGHT: Quarterly Voting Survey -->
+        <div class="split-section">
+            <h3>Quarterly Voting Survey (Eligible Partners Only)</h3>
+            <p class="subtitle">This quarterly survey is available only to restaurants with consistent engagement in real-time feedback. It captures operational ratings and allocates votes to community causes.</p>
+            
+            <form class="survey-form" onsubmit="handleSurveySubmit(event)">
+                
+                <!-- Rating Section -->
+                <div class="rating-section">
+                    <h4>Rate your operational experience this quarter:</h4>
+                    <div class="rating-header">
+                        <div>1 = Excellent, 5 = Poor</div>
+                        <div>Excellent</div>
+                        <div>Good</div>
+                        <div>Neutral</div>
+                        <div>Poor</div>
+                        <div>Very Poor</div>
+                    </div>
+                    
+                    <div class="rating-row">
+                        <label>Service Quality</label>
+                        <div class="rating-option"><input type="radio" name="service-quality" value="1"></div>
+                        <div class="rating-option"><input type="radio" name="service-quality" value="2"></div>
+                        <div class="rating-option"><input type="radio" name="service-quality" value="3"></div>
+                        <div class="rating-option"><input type="radio" name="service-quality" value="4"></div>
+                        <div class="rating-option"><input type="radio" name="service-quality" value="5"></div>
+                    </div>
+                    
+                    <div class="rating-row">
+                        <label>Delivery Accuracy</label>
+                        <div class="rating-option"><input type="radio" name="delivery-accuracy" value="1"></div>
+                        <div class="rating-option"><input type="radio" name="delivery-accuracy" value="2"></div>
+                        <div class="rating-option"><input type="radio" name="delivery-accuracy" value="3"></div>
+                        <div class="rating-option"><input type="radio" name="delivery-accuracy" value="4"></div>
+                        <div class="rating-option"><input type="radio" name="delivery-accuracy" value="5"></div>
+                    </div>
+                    
+                    <div class="rating-row">
+                        <label>Product Consistency</label>
+                        <div class="rating-option"><input type="radio" name="product-consistency" value="1"></div>
+                        <div class="rating-option"><input type="radio" name="product-consistency" value="2"></div>
+                        <div class="rating-option"><input type="radio" name="product-consistency" value="3"></div>
+                        <div class="rating-option"><input type="radio" name="product-consistency" value="4"></div>
+                        <div class="rating-option"><input type="radio" name="product-consistency" value="5"></div>
+                    </div>
+                </div>
+
+                <!-- Open Feedback -->
+                <div class="form-group">
+                    <label>Operational improvement priorities for MFE:</label>
+                    <textarea placeholder="Specific service gaps, delivery timing issues, product quality concerns..."></textarea>
+                </div>
+
+                <!-- Voting Section -->
+                <div class="vote-section">
+                    <h4>Allocate 10 votes to community causes:</h4>
+                    <p class="instructions">Distribute your votes based on community priorities. Top-voted causes receive funding. Top-voting restaurants gain public recognition and media visibility.</p>
+                    
+                    <div class="remaining-votes">Remaining Votes: <span id="remaining-votes">10</span></div>
+                    
+                    <div class="vote-grid">
+                        <div class="vote-item">
+                            <label>Support Local Food Banks</label>
+                            <div class="vote-controls">
+                                <button type="button" class="vote-btn" onclick="changeVotes('foodbank', -1)">−</button>
+                                <span class="vote-count" id="foodbank-count">0</span>
+                                <button type="button" class="vote-btn" onclick="changeVotes('foodbank', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="vote-item">
+                            <label>Support Cancer Research</label>
+                            <div class="vote-controls">
+                                <button type="button" class="vote-btn" onclick="changeVotes('cancer', -1)">−</button>
+                                <span class="vote-count" id="cancer-count">0</span>
+                                <button type="button" class="vote-btn" onclick="changeVotes('cancer', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="vote-item">
+                            <label>Aid Homeless Shelters</label>
+                            <div class="vote-controls">
+                                <button type="button" class="vote-btn" onclick="changeVotes('homeless', -1)">−</button>
+                                <span class="vote-count" id="homeless-count">0</span>
+                                <button type="button" class="vote-btn" onclick="changeVotes('homeless', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="vote-item">
+                            <label>Aid Disaster Relief Efforts</label>
+                            <div class="vote-controls">
+                                <button type="button" class="vote-btn" onclick="changeVotes('disaster', -1)">−</button>
+                                <span class="vote-count" id="disaster-count">0</span>
+                                <button type="button" class="vote-btn" onclick="changeVotes('disaster', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="vote-item">
+                            <label>Support Mental Health Services</label>
+                            <div class="vote-controls">
+                                <button type="button" class="vote-btn" onclick="changeVotes('mental', -1)">−</button>
+                                <span class="vote-count" id="mental-count">0</span>
+                                <button type="button" class="vote-btn" onclick="changeVotes('mental', 1)">+</button>
                             </div>
                         </div>
                     </div>
-                    <div class="chat-input-container">
-                        <input type="text" class="chat-input" id="chat-input" placeholder="Ask about tiers, events, feedback, or metrics..." onkeypress="handleChatKeypress(event)">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+
+                    <div class="recognition-note">
+                        <strong>Recognition Mechanism:</strong> If your top-voted cause wins, your restaurant receives featured placement on MFE website, social media promotion, and inclusion in quarterly impact reports—driving new customer acquisition at zero cost.
                     </div>
                 </div>
-            </div>
-    <!-- AI Feedback (Continuous) -->
-<div class="split-section">
-    <h3>Real-Time Feedback (AI Concierge)</h3>
-    <p class="subtitle">Post-delivery feedback captured through voice or text and processed instantly by AI</p>
-    
-    <form class="survey-form" onsubmit="handleAIFeedback(event)">
-        
-        <div class="form-group">
-            <label>Submit feedback (voice or text):</label>
-            <textarea placeholder="Describe delivery issues, product concerns, or service feedback..."></textarea>
+
+                <!-- Additional Feedback -->
+                <div class="form-group">
+                    <label>Additional operational or CSR feedback:</label>
+                    <textarea placeholder="Optional: supply chain concerns, event participation interest, tier adjustment requests..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
         </div>
 
-        <div class="form-group">
-            <label>Optional: Upload voice note</label>
-            <input type="file" accept="audio/*">
-        </div>
-
-        <button type="submit" class="submit-btn">Submit Real-Time Feedback</button>
-    </form>
-
-    <div class="recognition-note">
-        This feedback is processed instantly by the AI Concierge and contributes to operational improvements. Consistent participation unlocks eligibility for quarterly voting and recognition.
     </div>
-</div> 
-            <!-- Survey Form -->
-            <div class="split-section">
-                <h3>Quarterly Voting Survey (Eligible Partners Only)</h3>
-                <p class="subtitle">This quarterly survey is available only to restaurants with consistent engagement in real-time feedback. It captures operational ratings and allocates votes to community causes.</p>
-                
-                <form class="survey-form" onsubmit="handleSurveySubmit(event)">
-                    <!-- Rating Section -->
-                    <div class="rating-section">
-                        <h4>Rate your operational experience this quarter:</h4>
-                        <div class="rating-header">
-                            <div>1 = Excellent, 5 = Poor</div>
-                            <div>Excellent</div>
-                            <div>Good</div>
-                            <div>Neutral</div>
-                            <div>Poor</div>
-                            <div>Very Poor</div>
-                        </div>
-                        
-                        <div class="rating-row">
-                            <label>Service Quality</label>
-                            <div class="rating-option"><input type="radio" name="service-quality" value="1"></div>
-                            <div class="rating-option"><input type="radio" name="service-quality" value="2"></div>
-                            <div class="rating-option"><input type="radio" name="service-quality" value="3"></div>
-                            <div class="rating-option"><input type="radio" name="service-quality" value="4"></div>
-                            <div class="rating-option"><input type="radio" name="service-quality" value="5"></div>
-                        </div>
-                        
-                        <div class="rating-row">
-                            <label>Delivery Accuracy</label>
-                            <div class="rating-option"><input type="radio" name="delivery-accuracy" value="1"></div>
-                            <div class="rating-option"><input type="radio" name="delivery-accuracy" value="2"></div>
-                            <div class="rating-option"><input type="radio" name="delivery-accuracy" value="3"></div>
-                            <div class="rating-option"><input type="radio" name="delivery-accuracy" value="4"></div>
-                            <div class="rating-option"><input type="radio" name="delivery-accuracy" value="5"></div>
-                        </div>
-                        
-                        <div class="rating-row">
-                            <label>Product Consistency</label>
-                            <div class="rating-option"><input type="radio" name="product-consistency" value="1"></div>
-                            <div class="rating-option"><input type="radio" name="product-consistency" value="2"></div>
-                            <div class="rating-option"><input type="radio" name="product-consistency" value="3"></div>
-                            <div class="rating-option"><input type="radio" name="product-consistency" value="4"></div>
-                            <div class="rating-option"><input type="radio" name="product-consistency" value="5"></div>
-                        </div>
-                    </div>
+</section>
 
-                    <!-- Open Feedback -->
-                    <div class="form-group">
-                        <label>Operational improvement priorities for MFE:</label>
-                        <textarea placeholder="Specific service gaps, delivery timing issues, product quality concerns..."></textarea>
-                    </div>
-
-                    <!-- Voting Section -->
-                    <div class="vote-section">
-                        <h4>Allocate 10 votes to community causes:</h4>
-                        <p class="instructions">Distribute your votes based on community priorities. Top-voted causes receive funding. Top-voting restaurants gain public recognition and media visibility.</p>
-                        
-                        <div class="remaining-votes">Remaining Votes: <span id="remaining-votes">10</span></div>
-                        
-                        <div class="vote-grid">
-                            <div class="vote-item">
-                                <label>Support Local Food Banks</label>
-                                <div class="vote-controls">
-                                    <button type="button" class="vote-btn" onclick="changeVotes('foodbank', -1)">−</button>
-                                    <span class="vote-count" id="foodbank-count">0</span>
-                                    <button type="button" class="vote-btn" onclick="changeVotes('foodbank', 1)">+</button>
-                                </div>
-                            </div>
-                            
-                            <div class="vote-item">
-                                <label>Support Cancer Research</label>
-                                <div class="vote-controls">
-                                    <button type="button" class="vote-btn" onclick="changeVotes('cancer', -1)">−</button>
-                                    <span class="vote-count" id="cancer-count">0</span>
-                                    <button type="button" class="vote-btn" onclick="changeVotes('cancer', 1)">+</button>
-                                </div>
-                            </div>
-                            
-                            <div class="vote-item">
-                                <label>Aid Homeless Shelters</label>
-                                <div class="vote-controls">
-                                    <button type="button" class="vote-btn" onclick="changeVotes('homeless', -1)">−</button>
-                                    <span class="vote-count" id="homeless-count">0</span>
-                                    <button type="button" class="vote-btn" onclick="changeVotes('homeless', 1)">+</button>
-                                </div>
-                            </div>
-                            
-                            <div class="vote-item">
-                                <label>Aid Disaster Relief Efforts</label>
-                                <div class="vote-controls">
-                                    <button type="button" class="vote-btn" onclick="changeVotes('disaster', -1)">−</button>
-                                    <span class="vote-count" id="disaster-count">0</span>
-                                    <button type="button" class="vote-btn" onclick="changeVotes('disaster', 1)">+</button>
-                                </div>
-                            </div>
-                            
-                            <div class="vote-item">
-                                <label>Support Mental Health Services</label>
-                                <div class="vote-controls">
-                                    <button type="button" class="vote-btn" onclick="changeVotes('mental', -1)">−</button>
-                                    <span class="vote-count" id="mental-count">0</span>
-                                    <button type="button" class="vote-btn" onclick="changeVotes('mental', 1)">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="recognition-note">
-                            <strong>Recognition Mechanism:</strong> If your top-voted cause wins, your restaurant receives featured placement on MFE website, social media promotion, and inclusion in quarterly impact reports—driving new customer acquisition at zero cost.
+<!-- Chatbot BELOW (separate section) -->
+<section class="bottom-split">
+    <div class="container">
+        <div class="split-section">
+            <h3>Platform Support Assistant</h3>
+            <p class="subtitle">Real-time guidance on tier selection, event participation, feedback submission, and impact metrics</p>
+            
+            <div class="chatbot-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message bot">
+                        <div class="message-avatar bot">🐝</div>
+                        <div class="message-bubble bot">
+                            Welcome to the BEE The Good platform assistant. I can help you understand tier benefits, participation requirements, feedback mechanisms, or impact analytics. What would you like to know?
                         </div>
                     </div>
-
-                    <!-- Additional Feedback -->
-                    <div class="form-group">
-                        <label>Additional operational or CSR feedback:</label>
-                        <textarea placeholder="Optional: supply chain concerns, event participation interest, tier adjustment requests..."></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Submit Feedback</button>
-                </form>
-            </div>
-
-            <!-- AI Chatbot -->
-            <div class="split-section">
-                <h3>Platform Support Assistant</h3>
-                <p class="subtitle">Real-time guidance on tier selection, event participation, feedback submission, and impact metrics</p>
-                
-                <div class="chatbot-container">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="chat-message bot">
-                            <div class="message-avatar bot">🐝</div>
-                            <div class="message-bubble bot">
-                                Welcome to the BEE The Good platform assistant. I can help you understand tier benefits, participation requirements, feedback mechanisms, or impact analytics. What would you like to know?
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat-input-container">
-                        <input type="text" class="chat-input" id="chat-input" placeholder="Ask about tiers, events, feedback, or metrics..." onkeypress="handleChatKeypress(event)">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
-                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about tiers, events, feedback, or metrics..." onkeypress="handleChatKeypress(event)">
+                    <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer>
